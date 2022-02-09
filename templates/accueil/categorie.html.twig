@@ -1,0 +1,77 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  {{nomCategorie}}
+{% endblock %}
+
+{% block body %}
+<div class="TitreCategorie">
+  <h1>{{nomCategorie}}</h1>
+</div>
+  <div class="container mt-50 mb-50">
+  
+     
+    <div class="row">
+      {% for produit in produits %}
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-img-actions">
+              <a href={{ path('detailpdt', { id: produit.id } ) }}><img src={{ produit.photo }} class="card-img img-fluid"
+                  alt="" /></a>
+              </div>
+            </div>
+            <div class="card-body bg-light text-center">
+              <div class="mb-2">
+                <h6 class="font-weight-semibold mb-2">
+                  <a href="#" class="text-uppercase mb-2 text-dark" data-abc="true">
+                    {{ produit.nom }}
+                  </a>
+                </h6> <a href="#" class="text-muted" data-abc="true">{{
+                    produit.description
+                  }}</a>
+              </div>
+              <h3 class="mb-0 font-weight-semibold">
+                {{ produit.prix }}€
+              </h3>
+                  <button type="button" class="btn btn-success" id="BoutonAjoutPanier">
+              <a href="{{ path('cart_add', {'id': produit.id }) }}" class="card-link">Ajouter au panier</a>
+                <i class="fa fa-cart-plus mr-2" style="color:white"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<div class="NbProduit">
+  {% if previous >= 0 %}
+    <a href="{{
+      path(
+        'accueil',
+        {
+          offset: previous
+        }
+      )
+      }}"
+      class="btn btn sm btn primary">
+      <<
+    </a>
+  {% endif %}Il y a {{ (produits|length) ~ ' produit'
+    ~ ((produits|length) > 1 ? 's' : '') }}
+  {% if next < (produits|length) %}
+    <a href="{{
+      path(
+        'accueil',
+        {
+          offset: next
+        }
+      )
+      }}"
+      class="btn btn sm btn primary">
+      >>
+    </a>
+  {% endif %}
+  </div>
+{% endblock %}

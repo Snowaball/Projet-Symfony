@@ -1,0 +1,63 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Détail produit
+{% endblock %}
+
+{% block body %}
+
+	<div class="container-fluid text-center" style="padding:0">
+		<h1 class="TitreCategorie">
+			Produits admin
+		</h1>
+		<div style="margin-bottom:30px">
+			<a href={{path('creation_produit')}}>
+				<button type="button" class="btn btn-primary mt-3 mb-3">Ajouter Produit</button>
+			</a>
+		</div>
+		<div class="container">
+
+			{% for produit in produits %}
+				<div class="card d-flex justify-content-center " style="height: 13vh; padding:0 100px">
+					<div class="row no-gutters ">
+						<div class="col-2 align-self-center">
+							<img src={{produit.photo}} class="rounded" style="height: 80px" alt="...">
+						</div>
+						<div class="col-2 align-self-center">
+							<h6>Nom</h6>
+							<h3 class="card-text">{{produit.nom}}</h3>
+						</div>
+						<div class="col-3 align-self-center">
+							<h6>Description</h6>
+							<h6 class="card-text">{{produit.description}}</h6>
+						</div>
+						<div class="col-1 align-self-center">
+							<h6>Stock</h6>
+							<h4 class="card-text">{{produit.stock}}</small>
+						</h4>
+					</div>
+					<div class="col-2 align-self-center">
+						<h6>Prix</h6>
+						<h5 class="card-text">{{produit.prix}}
+							€</h5>
+					</div>
+					<div class="col-1 align-self-center">
+						{% if produit.isActive %}
+							<button type="button" class="btn btn-success mt-2">Actif</button>
+						{% else %}
+							<button type="button" class="btn btn-danger mt-2">Inactif</button>
+						{% endif %}
+					</div>
+					<div class="col-1 align-self-center">
+						<a href={{path( 'modif_produit' , {id: produit.id} )}}>
+							<button type="button" class="btn btn-primary mt-2">Modifier</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+        <div class="mt-5">
+				<a href={{path('compte')}}><button class="btn btn-lg btn-primary" type="button"><< Retour</button></a>
+			</div>
+	</div>
+{% endblock %}

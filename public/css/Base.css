@@ -1,0 +1,84 @@
+*,::before, ::after{
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1 0 auto;
+}
+
+/* Navbar */
+.navbar {
+  padding-left: 50px;
+  padding-right: 50px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 0;
+}
+
+.navbar-expand {
+  margin: 0px;
+  background-color: lightgrey;
+  border: none;
+}
+
+.navbar-brand {
+  height: 100px;
+}
+
+
+/* Add a gray background color and some padding to the footer */
+footer {
+  background-color: #f2f2f2;
+  padding: 15px;
+  bottom: 0;
+  margin-top: 50px;
+}
+
+
+/* logo */
+
+.navbar-brand img {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  width: 100px;
+}
+
+#boutonLoginPanier {
+  margin-top: 16px;
+}
+
+/* Page Catégorie */
+
+.TitreCategorie {
+  margin: 30px 0px 30px 0px;
+}
+
+.TitreCategorie h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 20px;
+}
+/* Nb produit bas de page */
+.NbProduit {
+  margin: 20px;
+  text-align: center;
+}
+
+/* -------------Page Produits--------------- */
+
+.TitrePageProduit h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  margin: 20px;
+}

@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créez un compte{% endblock %}
+
+{% block body %}
+    {% for flashError in app.flashes('verify_email_error') %}
+        <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+    {% endfor %}
+
+<div class="container">
+    <h1 class="text-center mt-3 mb-3">Créez un compte</h1>
+    <div class="text-right">
+    {{ form(registrationForm) }}
+    </div>
+</div>
+{% endblock %}

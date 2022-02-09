@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+  Accueil
+{% endblock %}
+
+{% block body %}
+{% for message in app.flashes('stock') %}
+    <div class="alert alert-danger">
+        {{ message }}
+    </div>
+{% endfor %}
+  <div class="container d-flex justify-content-center mt-50 mb-50">
+    <div class="row">
+      {% for produit in produits %}
+        <div class="col-md-4 mt-2">
+          <div class="card">
+            <div class="card-body">
+              <div class="card-img-actions">
+              <a href={{ path('detailpdt', { id: produit.id } ) }}><img src={{ produit.photo }} class="card-img img-fluid"
+                  alt="" /></a>
+              </div>
+            </div>
+            <div class="card-body bg-light text-center">
+              <div class="mb-2">
+                <h5 class="font-weight-semibold mb-2">
+                  <a class="text-uppercase mb-2 text-dark" data-abc="true">
+                    {{ produit.nom }}
+                  </a>
+                </h5> <a class="text-muted" data-abc="true">{{
+                    produit.description
+                  }}</a>
+              </div>
+              <h4 class="mb-0 font-weight-semibold"  >
+                {{ produit.prix }}€
+              </h4>
+              {% if (is_granted('ROLE_USER')) or (is_granted('ROLE_ADMIN')) %}
+              <button type="button" class="btn btn-success" id="BoutonAjoutPanier">
+              <a href="{{ path('cart_add', {'id': produit.id }) }}" class="card-link">Ajouter au panier</a>
+              {% else %}
+              <a href="{{ path('cart_addpasco_panier', {'id': produit.id }) }}" class="btn btn-success" id="BoutonAjoutPanier">Ajouter au panier</a>
+              {% endif %}
+              
+                <i class="fa fa-cart-plus mr-2" style="color:white"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+
+<div class="NbProduit">
+  {% if previous >= 0 %}
+    <a href="{{
+      path(
+        'accueil',
+        {
+          offset: previous
+        }
+      )
+      }}"
+      class="btn btn sm btn primary">
+      <<
+    </a>
+  {% endif %}Il y a {{ (produits|length) ~ ' produit'
+    ~ ((produits|length) > 1 ? 's' : '') }}
+  {% if next < (produits|length) %}
+    <a href="{{
+      path(
+        'accueil',
+        {
+          offset: next
+        }
+      )
+      }}"
+      class="btn btn sm btn primary">
+      >>
+    </a>
+  {% endif %}
+  </div>
+{% endblock %}

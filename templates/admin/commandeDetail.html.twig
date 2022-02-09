@@ -1,0 +1,89 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+	Détail de la commande
+{% endblock %}
+
+{% block body %}
+	<div class="container">
+		<div class="bg-light p-3  mt-3">
+			<div>
+				<h2>
+					Détails de la commande numero :
+					{{idcommande}}
+				</h2>
+			</div>
+			<div class='row  mt-5'>
+				<div class='col-2 text-right'>
+					<h3>Identité :</h3>
+					<h5>Adresse :</h5>
+					<h5>Tel :</h5>
+					<h5>E-mail:</h5>
+				</div>
+
+				<div class="col-10">
+					<h3>{{utilisateur.firstName}}
+						{{utilisateur.lastName}}</h3>
+					<h5>{{utilisateur.address}}</h5>
+					<h5>{{utilisateur.phonenumber}}</h5>
+					<h5>{{utilisateur.email}}</h5>
+				</div>
+			</div>
+		</div>
+
+		{% if commande | length > 0 %}
+			<table class='table  mt-3'>
+				<thead>
+					<tr>
+						<th>Produit</th>
+						<th>Prix</th>
+						<th>Quantité</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<tbody>
+
+					{% for item in commande %}
+						<tr>
+							<td>{{ item.produitnom }}</td>
+							<td>{{ item.produitprix }}
+								€</td>
+							<td>{{ item.produitquantite }}
+							</td>
+							<td>{{ item.produitprix * item.produitquantite }}
+								€</td>
+						</tr>
+
+					{% endfor %}
+				</tbody>
+				<tfoot>
+					<tr>
+						<td colspan="3" class="text-right font-weight-bold">Total :</td>
+						<td>{{total}}
+							€</td>
+						<td></td>
+					</tr>
+				</tfoot>
+			</table>
+		{% else %}
+			<p>Vous n'avez pas encore de commande enregistrée.</p>
+		{% endif %}
+
+		<div>
+		{% if is_granted("ROLE_ADMIN") %}
+		<div>
+						<a href={{path('commandes_admin')}}>
+							<button class="btn btn-lg btn-primary" type="button"><< Retour</button>
+						</a>
+					</div>
+			{% else %}	
+			<div>
+						<a href={{path('commandes_user')}}>
+							<button class="btn btn-lg btn-primary" type="button"><< Retour</button>
+						</a>
+					</div>	
+			
+		{% endif %}
+		</div>
+	</div>
+{% endblock %}

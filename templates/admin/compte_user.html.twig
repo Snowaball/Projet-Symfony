@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Compte utilisateur
+{% endblock %}
+
+{% block body %}
+<div class="container">
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success" role="alert">{{ message }}</div>
+	{% endfor %}
+	<div class="text-center mt-3 mb-4">
+		<h1>Bienvenue
+			{{app.user.username}}</h1>
+		<h2>Modifiez votre compte :</h2>
+	</div>
+	<div>
+		{{ form(formUser) }}
+		</div>
+		<hr class="mt-5 mb-5"/>
+		<div>
+			{{ form(formPass) }}
+			</div>
+
+
+	<div class="mt-5">
+		<a href={{path('compte')}}>
+			<button class="btn btn-lg btn-primary" type="button"><< Retour</button>
+		</a>
+	</div>
+
+{% endblock %}
